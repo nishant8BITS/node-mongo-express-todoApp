@@ -20,13 +20,36 @@ router.post('/', function(req, res, next){
 	});
 });
 
+/* GET /todos/id */
+router.get('/:id', function(req, res, next) {
+  Todo.findById(req.params.id, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
+/* PUT /todos/:id */
+router.put('/:id', function(req, res, next) {
+console.log("Havent askjdklasj " + req.params.id);
+  Todo.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
+/* DELETE /todos/:id */
+router.delete('/:id', function(req, res, next) {
+  Todo.findByIdAndRemove(req.params.id, req.body, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
 
 // Check Connection 
 var request = require('request');
 
-request.post(
-    'http://localhost:3001/todos',
-{ form: { name: 'Nishant', completed :true , note: "Some Text" } },
+request.get(
+    'localhost:3001/todos/557f025bf7a2fa03832471ec',
 function (error, response, body) {
     if (!error && response.statusCode == 200) {
        // console.log(body)
