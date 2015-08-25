@@ -12,7 +12,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next){
-	console.log(req.body.name);
 	Todo.create(req.body, function(err, post){
 		if(err) return next(err);
 		res.json(post);
